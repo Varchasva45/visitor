@@ -22,6 +22,15 @@ app.post('/visitor', async (req, res) => {
     }
 })
 
+app.get('/getViews', async (req, res) => {
+    try {
+        const totalCount = await View.countDocuments({});
+        return res.status(200).json({message: `total views till date is ${totalCount}`})
+    } catch (error) {
+        return res.status(500).send('Internal Server Error')
+    }
+})
+
 app.listen(3000, () => {
     console.log(`Server is listening on Port ${port}`)
 });
